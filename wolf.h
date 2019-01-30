@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 13:58:31 by ochaar            #+#    #+#             */
-/*   Updated: 2019/01/29 14:28:31 by tbauer           ###   ########.fr       */
+/*   Updated: 2019/01/29 15:46:04 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 # include <math.h>
 # include <pthread.h>
 # include "mlx.h"
-# include "Libft/includes/libft.h"
+# include "libft/libft.h"
 # include <stdio.h>
-# include <fcntl.h>
 
 # define NBR_THREADS 4
 # define KEY_PLUS 69

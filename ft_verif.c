@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 13:42:32 by ochaar            #+#    #+#             */
-/*   Updated: 2019/01/29 14:24:59 by tbauer           ###   ########.fr       */
+/*   Updated: 2019/01/30 11:48:57 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		ft_count(char *line, char c)
 	i = 0;
 	nb = 0;
 	len = ft_strlen(line);
+	if (len > 20)
+		return (0);
 	while (i < len)
 	{
 		if (line[i] == ' ' || line[i] == '\t')
@@ -37,7 +39,7 @@ int		ft_count(char *line, char c)
 	return (nb);
 }
 
-void	ft_free(char **dst)
+void	ft_free_char(char **dst)
 {
 	int		k;
 
@@ -48,6 +50,19 @@ void	ft_free(char **dst)
 		k++;
 	}
 	free(dst);
+}
+
+void	ft_free_int(int **tmp)
+{
+	int		k;
+
+	k = 0;
+	while (k < 10)
+	{
+		free(tmp[k]);
+		k++;
+	}
+	free(tmp);
 }
 
 void	ft_check_walls(t_map *data)
@@ -78,35 +93,41 @@ void	read_data(char *file, t_map *data)
 {
 	char	**dst;
 	char	*line;
+	int		**tmp;
 	int		fd;
 
 	data->i = 0;
 	fd = open(file, O_RDONLY);
-	data->tab = (int**)malloc(sizeof(int*) * data->nb_lines);
+	if (!(tmp = (int**)malloc(sizeof(int*) * data->nb_lines)))
+		return;
+	data->tab = tmp;
 	while (data->i < data->nb_lines)
 	{
 		data->j = 0;
 		get_next_line(fd, &line);
 		dst = ft_strsplit(line, ' ');
-		data->tab[data->i] = (int*)malloc(sizeof(int) * (data->nb_num));
+		if (!(tmp[data->i] = (int*)malloc(sizeof(int) * data->nb_num)))
+			return;
+		//data->tab[data->i] = tmp[data->i];
 		while (dst[data->j])
 		{
-			data->tab[data->i][data->j] = ft_atoi(dst[data->j]);
+			tmp[data->i][data->j] = ft_atoi(dst[data->j]);
+			data->tab[data->i][data->j] = tmp[data->i][data->j];
 			data->j++;
 		}
-		ft_free(dst);
+		ft_free_char(dst);
 		free(line);
 		data->i++;
 	}
+	ft_free_int(tmp);
+	ft_print_tab(data->tab);
 	close(fd);
-	ft_check_walls(data);
 }
 
 void	ft_verif(char *file, t_data *wolf)
 {
 	int		fd;
 	char	*line;
-	int		ret;
 	t_map	data;
 
 	data.nb_lines = 0;
@@ -114,7 +135,7 @@ void	ft_verif(char *file, t_data *wolf)
 	fd = open(file, O_RDONLY);
 	/*if (fd <= 0)
 		ft_error();*/
-	while ((ret = get_next_line(fd, &line)) > 0)
+	while (get_next_line(fd, &line))
 	{
 		data.nb_num = ft_count(line, ' ');
 		if (data.nb_num != 10)
@@ -126,6 +147,7 @@ void	ft_verif(char *file, t_data *wolf)
 		ft_error(0);
 	close(fd);
 	read_data(file, &data);
+	ft_check_walls(&data);
 }
 
 void	ft_init(t_data *frac)

@@ -6,10 +6,11 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 10:19:44 by ochaar            #+#    #+#             */
-/*   Updated: 2019/01/29 15:04:52 by tbauer           ###   ########.fr       */
+/*   Updated: 2019/01/28 11:25:32 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "wolf.h"
 
 void		ft_algo(t_data *wolf)

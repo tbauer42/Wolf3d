@@ -3,70 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbauer <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: fbecerri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/30 18:22:22 by tbauer            #+#    #+#             */
-/*   Updated: 2018/10/29 20:32:43 by tbauer           ###   ########.fr       */
+/*   Created: 2018/11/15 09:53:19 by fbecerri          #+#    #+#             */
+/*   Updated: 2018/11/23 18:12:24 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_del(char **stk)
+char	*ft_strndup(const char *str, size_t n)
 {
-	if (stk != NULL)
+	unsigned int	i;
+	char			*dst;
+
+	if (!(dst = (char*)malloc(sizeof(char) * (n + 1))))
+		return (NULL);
+	i = 0;
+	while (str[i] && i < n)
 	{
-		free(*stk);
-		*stk = NULL;
+		dst[i] = str[i];
+		i++;
 	}
-	return (0);
+	dst[i] = '\0';
+	return (dst);
 }
 
-static char	*ft_join(char *stk, char *buf)
+char	*ft_reader(char **str, char *buff, int fd)
 {
-	char		*tmp;
-
-	tmp = stk;
-	stk = ft_strjoin(tmp, buf);
-	ft_strdel(&tmp);
-	return (stk);
-}
-
-static char	*ft_sub(char *stk)
-{
-	char		*tmp;
-
-	tmp = stk;
-	stk = ft_strsub(tmp, ft_strchr(tmp, '\n') - tmp + 1, \
-		ft_strlen(ft_strchr(tmp, '\n')));
-	ft_strdel(&tmp);
-	return (stk);
-}
-
-int			get_next_line(int const fd, char **line)
-{
-	static char	*stk[2147483647];
-	char		buf[BUFF_SIZE + 1];
-	int			ret;
+	char	*tmp;
+	int		ret;
 
 	ret = 1;
-	if (BUFF_SIZE < 1 || !line || fd < 0)
-		return (-1);
-	if (!stk[fd])
-		stk[fd] = ft_strnew(0);
-	while (!(ft_strchr(stk[fd], '\n')) && (ret = read(fd, buf, BUFF_SIZE)) > 0)
+	while (!(ft_strchr(*str, '\n')) && ret != 0)
 	{
-		buf[ret] = '\0';
-		stk[fd] = ft_join(stk[fd], buf);
+		ret = read(fd, buff, BUFF_SIZE);
+		if (ret == -1)
+			return (NULL);
+		if (ret)
+		{
+			buff[ret] = '\0';
+			tmp = *str;
+			if (!(*str = ft_strjoin(*str, buff)))
+				return (NULL);
+			free(tmp);
+		}
 	}
-	if (ret < 0)
+	free(buff);
+	return (*str);
+}
+
+char	*ft_line(char **str)
+{
+	char		*buff;
+	char		*line;
+	char		*tmp;
+
+	buff = ft_strchr(*str, '\n');
+	tmp = NULL;
+	if (buff)
+	{
+		if (!(line = ft_strndup(*str, buff - *str)))
+			return (NULL);
+		tmp = *str;
+		if (!(*str = ft_strdup(buff + 1)))
+			return (NULL);
+		free(tmp);
+	}
+	else if (!(line = ft_strdup(*str)))
+		return (NULL);
+	if (!((*str) && tmp))
+	{
+		free(*str);
+		*str = NULL;
+	}
+	return (line);
+}
+
+int		get_next_line(const int fd, char **line)
+{
+	static char		*str;
+	char			*buff;
+
+	if (!str)
+		str = NULL;
+	if (fd < 0 || !line || BUFF_SIZE <= 0 || !(buff = ft_strnew(BUFF_SIZE + 1))
+		|| (!str && !(str = ft_strnew(0))))
 		return (-1);
-	*line = ft_strchr(stk[fd], '\n') ? ft_strsub(stk[fd], 0, \
-			ft_strchr(stk[fd], '\n') - stk[fd] + 1) : ft_strdup(stk[fd]);
-	if (ft_strlen(*line) == 0)
-		return (ft_del(&stk[fd]));
-	if (ret)
-		line[0][ft_strlen(*line) - 1] = '\0';
-	stk[fd] = ft_sub(stk[fd]);
-	return (1);
+	if (!(ft_reader(&str, buff, fd)))
+		return (-1);
+	if (*str)
+	{
+		if (!(*line = ft_line(&str)))
+			return (-1);
+		return (1);
+	}
+	return (0);
 }

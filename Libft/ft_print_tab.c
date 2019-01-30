@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_print_tab.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 14:06:38 by ochaar            #+#    #+#             */
-/*   Updated: 2018/11/09 14:25:47 by ochaar           ###   ########.fr       */
+/*   Created: 2019/01/29 16:20:45 by ochaar            #+#    #+#             */
+/*   Updated: 2019/01/29 16:45:35 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+#include "libft.h"
+
+void	ft_print_tab(int **tab)
 {
 	int i;
+	int j;
 
 	i = 0;
-	if (!(s && f))
-		return ;
-	while (s[i])
+	while (i < 10)
 	{
-		f(i, &s[i]);
+		j = 0;
+		while (j < 10)
+		{
+			ft_putnbr(tab[i][j]);
+			j++;
+		}
+		write(1, "\n", 1);
 		i++;
 	}
 }
