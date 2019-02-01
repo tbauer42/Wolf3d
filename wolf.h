@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 13:58:31 by ochaar            #+#    #+#             */
-/*   Updated: 2019/01/29 15:46:04 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/01/29 14:28:31 by tbauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include <math.h>
 # include <pthread.h>
 # include "mlx.h"
-# include "libft/libft.h"
+# include "Libft/includes/libft.h"
 # include <stdio.h>
+# include <fcntl.h>
 
 # define NBR_THREADS 4
 # define KEY_PLUS 69
@@ -28,6 +29,37 @@
 # define KEY_ESC 53
 # define SCREEN_X 500
 # define SCREEN_Y 500
+typedef struct			s_env
+{
+	double posX;
+	double posY;
+	double dirX;
+	double dirY;
+	double planeX;
+	double planeY;
+	double time;
+	double pretime;
+	double cameraX;
+	double rayDirX;
+	double rayDirY;
+	int x;
+	int w;
+	int mapX;
+	int mapY;
+	double deltaDistX;
+	double deltaDistY;
+	int hit;
+	double sideDistX;
+	double sideDistY;
+	double perpWallDist;
+	int stepX;
+	int stepY;
+	int side;
+	int lineHeight;
+	int drawStart;
+	int drawEnd;
+
+}						t_env;
 
 typedef struct			s_data
 {

@@ -3,72 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tbauer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 17:25:21 by ochaar            #+#    #+#             */
-/*   Updated: 2018/11/13 11:51:00 by ochaar           ###   ########.fr       */
+/*   Created: 2018/10/30 17:29:55 by tbauer            #+#    #+#             */
+/*   Updated: 2018/10/30 17:29:56 by tbauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static int	ft_length(int nb)
+static void	lengths(int n, size_t *len, int *weight)
 {
-	int	i;
-
-	i = 1;
-	if (nb < 0)
+	*len = 1;
+	if (n >= 0)
 	{
-		nb = nb * -1;
-		i++;
+		*len = 0;
+		n = -n;
 	}
-	while (nb >= 10)
+	*weight = 1;
+	while (n / *weight < -9)
 	{
-		nb = nb / 10;
-		i++;
+		*weight *= 10;
+		*len += 1;
 	}
-	return (i);
-}
-
-static char	*ft_stock(char *str, int nbr, int len)
-{
-	int		i;
-
-	str[len] = '\0';
-	len = len - 1;
-	if (nbr < 0)
-	{
-		nbr = nbr * -1;
-		i = 1;
-		str[0] = '-';
-	}
-	else
-		i = 0;
-	while (len >= i)
-	{
-		str[len] = nbr % 10 + '0';
-		nbr = nbr / 10;
-		len--;
-	}
-	return (str);
 }
 
 char		*ft_itoa(int n)
 {
-	int		len;
-	int		over;
+	size_t	len;
+	int		weight;
+	size_t	cur;
 	char	*str;
 
-	over = 0;
-	if (n == -2147483648)
-	{
-		n = -2147483647;
-		over = 1;
-	}
-	len = ft_length(n);
-	if (!(str = (char*)malloc(sizeof(char) * len + 1)))
+	lengths(n, &len, &weight);
+	str = (char *)malloc(sizeof(*str) * (len + 1));
+	if (str == NULL)
 		return (NULL);
-	str = ft_stock(str, n, len);
-	str[len - 1] += over;
+	cur = 0;
+	if (n < 0)
+	{
+		str[cur] = '-';
+		cur++;
+	}
+	if (n > 0)
+		n = -n;
+	while (weight >= 1)
+	{
+		str[cur++] = -(n / weight % 10) + 48;
+		weight /= 10;
+	}
+	str[cur] = '\0';
 	return (str);
 }

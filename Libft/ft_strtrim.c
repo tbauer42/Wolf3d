@@ -3,61 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ochaar <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tbauer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 15:56:39 by ochaar            #+#    #+#             */
-/*   Updated: 2018/11/11 16:48:25 by ochaar           ###   ########.fr       */
+/*   Created: 2018/10/30 17:39:24 by tbauer            #+#    #+#             */
+/*   Updated: 2018/10/30 17:39:26 by tbauer           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static int	ft_last_index(char const *s, int i)
-{
-	int n;
-
-	n = 0;
-	while (s[i])
-	{
-		i++;
-		n++;
-	}
-	i = i - 1;
-	if (n > 0)
-	{
-		while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
-		{
-			i--;
-			n--;
-		}
-	}
-	return (n);
-}
-
-char		*ft_strtrim(char const *s)
+char	*ft_strtrim(char const *s)
 {
 	int		i;
-	int		j;
 	int		len;
 	char	*str;
 
-	i = 0;
-	j = 0;
-	if (!s)
+	if (s == NULL)
 		return (NULL);
-	while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
-		i++;
-	len = ft_last_index(s, i);
-	i = 0;
-	if (!(str = (char*)malloc(sizeof(*str) * (len + 1))))
+	len = ft_strlen(s);
+	while (s[len - 1] == ' ' || s[len - 1] == '\t' || s[len - 1] == '\n')
+		len--;
+	i = -1;
+	while (s[++i] == ' ' || s[i] == '\t' || s[i] == '\n')
+		len--;
+	if (len <= 0)
+		len = 0;
+	if (!(str = ft_strnew(ft_strlen(s))))
 		return (NULL);
-	while (s[j] == ' ' || s[j] == '\t' || s[j] == '\n')
-		j++;
-	while (i < len)
-	{
-		str[i] = s[j + i];
-		i++;
-	}
+	s += i;
+	i = -1;
+	while (++i < len)
+		str[i] = *s++;
 	str[i] = '\0';
 	return (str);
 }
