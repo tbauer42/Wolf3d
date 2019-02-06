@@ -6,7 +6,7 @@
 /*   By: tbauer <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:34:21 by tbauer            #+#    #+#             */
-/*   Updated: 2019/01/29 17:13:36 by tbauer           ###   ########.fr       */
+/*   Updated: 2019/02/01 13:48:23 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,7 @@ static	void	init_var(t_env *e, int x)
 	e->deltaDistY = fabs(1 / rayDirY);
 	e->hit = 0;
 }
-	double sideDistX;
-	double sideDistY;
-	double perpWallDist;
-	//what direction to step in x or y-direction (either +1 or -1)
-	int stepX;
-	int stepY;
-	int hit = 0; // was there a wall hit ?
-	int side; // was a NS or a EW wall hit ?
-		//calculate step and initial sideDistX
+//calculate step and initial sideDistX
 static	void	init_dir(t_env *e)
 {
 	if (e->rayDirX < 0)
@@ -120,4 +112,3 @@ int		raycasting(t_env *e)
 	}
 	return (0);
 }
-

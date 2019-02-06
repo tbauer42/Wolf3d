@@ -6,40 +6,29 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 10:19:44 by ochaar            #+#    #+#             */
-/*   Updated: 2019/01/29 15:04:52 by tbauer           ###   ########.fr       */
+/*   Updated: 2019/02/05 17:43:24 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "wolf.h"
-
-void		ft_algo(t_data *wolf)
-{
-	wolf->img_ptr[1] = 500 * 0x00FFFF;
-}
-
-void		put_pixel(int x, int y, int color, t_data *wolf)
-{
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
-
-	r = (color >> 16) & 0xff;
-	g = (color >> 8) & 0xff;
-	b = color & 0xff;
-	wolf->str[(x * 4) + ((int)SCREEN_X * 4 * y)] = b;
-	wolf->str[(x * 4) + ((int)SCREEN_X * 4 * y) + 1] = g;
-	wolf->str[(x * 4) + ((int)SCREEN_X * 4 * y) + 2] = r;
-	wolf->str[(x * 4) + ((int)SCREEN_X * 4 * y) + 3] = 0;
-}
 
 static int	deal_key(int key, t_data *wolf)
 {
 	if (key == KEY_ESC)
 		exit(0);
-	/*mlx_destroy_image(wolf->mlx, wolf->img);
+	if (key == KEY_RIGHT)
+		wolf->player.dirx -= 3;
+	if (key == KEY_LEFT)
+		wolf->player.dirx += 3;
+	if (key == KEY_DOWN)
+		wolf->player.posx -= 3;
+	if (key == KEY_UP)
+		wolf->player.posx += 3;
+	mlx_destroy_image(wolf->mlx, wolf->img);
 	wolf->img = mlx_new_image(wolf->mlx, SCREEN_X, SCREEN_Y);
-	wolf->img_ptr = (int*)mlx_get_data_addr(wolf->img, &key, &key, &key);
-	render(wolf);*/
+	wolf->str = mlx_get_data_addr(wolf->img, &key, &wolf->sizel, &key);
+	ft_ray(*wolf);
 	return (0);
 }
 
@@ -64,22 +53,24 @@ static int	deal_key(int key, t_data *wolf)
 int			main(int argc, char **argv)
 {
 	t_data	wolf;
+	//t_env	e;
+	t_obstacle	ob;
 	int		i;
 
 	i = 5;
 	if (argc == 2)
 	{
-		ft_verif(argv[1], &wolf);
-		ft_init(&wolf);
-		wolf.img_ptr = (int *)mlx_get_data_addr(wolf.img, &i, &i, &i);
-		//render(&wolf);
-		ft_algo(&wolf);
+		wolf.tab = ft_verif(argv[1]);
+		ft_init(&wolf, &ob);
+		wolf.str = mlx_get_data_addr(wolf.img, &i, &wolf.sizel, &i);
+		//raycasting(&wolf, &e, wolf.tab);
+		ft_ray(wolf);
 		mlx_key_hook(wolf.win, deal_key, &wolf);
 		//mlx_mouse_hook(wolf.win, mouse_hook, &wolf);
 		//mlx_hook(wolf.win, 6, (1L << 6), funct, &wolf);
 		mlx_loop(wolf.mlx);
 	}
 	else
-		ft_error(2);
+		ft_read_error(0);
 	return (0);
 }
