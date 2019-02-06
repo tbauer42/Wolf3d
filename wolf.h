@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 13:58:31 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/06 12:57:37 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/06 14:35:42 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <math.h>
 # include <pthread.h>
 # include "mlx.h"
-# include "libft/libft.h"
+# include "Libft/libft.h"
 # include <stdio.h>
 
 # define PRES 128.00

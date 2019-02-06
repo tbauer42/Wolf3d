@@ -6,11 +6,10 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 10:19:44 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/05 17:43:24 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/06 14:35:32 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "wolf.h"
 
 static int	deal_key(int key, t_data *wolf)
