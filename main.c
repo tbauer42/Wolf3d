@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 10:19:44 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/08 11:02:54 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/08 15:08:33 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@
 void		ft_walk_f(t_data *wolf, double angle)
 {
 	if (cos(angle) > 0)
-		wolf->player.posx += 5 * fabs(cos(angle));
+		wolf->player.posx += PRES * fabs(cos(angle));
 	else if (cos(angle) < 0)
-		wolf->player.posx += -1 * 5 * fabs(cos(angle));
+		wolf->player.posx += -1 * PRES * fabs(cos(angle));
 	if (sin(angle) > 0)
-		wolf->player.posy += -1 * 5 * fabs(sin(angle));
+		wolf->player.posy += -1 * PRES * fabs(sin(angle));
 	else if (sin(angle) < 0)
-		wolf->player.posy += 5 * fabs(sin(angle));
+		wolf->player.posy += PRES * fabs(sin(angle));
 }
 
 void		ft_walk_b(t_data *wolf, double angle)
 {
 	if (cos(angle) > 0)
-		wolf->player.posx -= 5 * fabs(cos(angle));
+		wolf->player.posx -= PRES * fabs(cos(angle));
 	else if (cos(angle) < 0)
-		wolf->player.posx -= -1 * 5 * fabs(cos(angle));
+		wolf->player.posx -= -1 * PRES * fabs(cos(angle));
 	if (sin(angle) > 0)
-		wolf->player.posy -= -1 * 5 * fabs(sin(angle));
+		wolf->player.posy -= -1 * PRES * fabs(sin(angle));
 	else if (sin(angle) < 0)
-		wolf->player.posy -= 5 * fabs(sin(angle));
+		wolf->player.posy -= PRES * fabs(sin(angle));
 }
 
 static int	deal_key(int key, t_data *wolf)
@@ -68,8 +68,8 @@ static int	deal_key(int key, t_data *wolf)
 		wolf->position_x = 0;
 		wolf->zoom = wolf->zoom * 2;
 	}
-	if (button == 5 || button == 2)
-		wolf->zoom = wolf->zoom * 0.5;
+	if (button == PRES || button == 2)
+		wolf->zoom = wolf->zoom * 0.PRES;
 	render(wolf);
 	return (0);
 }*/
@@ -79,7 +79,7 @@ int			main(int argc, char **argv)
 	t_data	wolf;
 	int		i;
 
-	i = 5;
+	i = PRES;
 	if (argc == 2)
 	{
 		wolf.tab = ft_verif(argv[1]);

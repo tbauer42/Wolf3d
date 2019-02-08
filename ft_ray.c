@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 15:57:18 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/07 16:41:02 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/08 14:19:32 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ t_inter		ft_vertical(double alpha, t_data wolf, int obstacle)
 
 int			ft_raycast(t_data wolf)
 {
-	pthread_t		ray_thread[8];
-	t_worker_arg	args[8];
+	pthread_t		ray_thread[16];
+	t_worker_arg	args[16];
 	int				i;
-	int				thr[8];
+	int				thr[16];
 
 	i = 0;
-	while (i < 8)
+	while (i < 16)
 	{
 		args[i] = (t_worker_arg)
 		{

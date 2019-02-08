@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 13:58:31 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/08 11:02:43 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/08 14:58:30 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "libft/libft.h"
 # include <stdio.h>
 
-# define PRES 128.00
+# define PRES 258.00
 # define RAD (M_PI / 180.00)
 # define KEY_PLUS 69
 # define KEY_UP 126
@@ -67,7 +67,7 @@ typedef struct		s_data
 	void		*img;
 	char		*str;
 	t_player	player;
-	double		dist_player;
+	double		proj_dist_player;
 	double		xmouse;
 	double		ymouse;
 	int			x;
