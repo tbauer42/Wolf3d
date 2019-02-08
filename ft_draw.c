@@ -6,13 +6,13 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 13:59:33 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/06 14:29:07 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/07 16:41:13 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void	put_pixel_image(int x, int y, int color, t_data *wolf)
+void	put_pixel_image(int x, int y, int color, const t_data *wolf)
 {
 	unsigned char r;
 	unsigned char g;
@@ -26,9 +26,9 @@ void	put_pixel_image(int x, int y, int color, t_data *wolf)
 	wolf->str[(x * 4) + ((int)SCREEN_X * 4 * y) + 2] = r;
 }
 
-void	draw(int x, t_data *wolf, t_obstacle ob)
+void	draw(int x, const t_data *wolf, t_obstacle ob)
 {
-	int				y;
+	int	y;
 
 	y = SCREEN_Y / 2 - ob.h / 2;
 	while (y < SCREEN_Y / 2 + ob.h / 2 && y < SCREEN_Y - 1)

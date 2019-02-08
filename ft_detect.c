@@ -6,13 +6,13 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 14:14:25 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/06 14:10:23 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/07 15:58:01 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-t_intersection	set(t_intersection *i)
+t_inter	set(t_inter *i)
 {
 	i->x = 10000;
 	i->y = 10000;
@@ -21,11 +21,11 @@ t_intersection	set(t_intersection *i)
 
 int				wall_detection(t_obstacle *ob, t_data wolf, double alpha)
 {
-	t_intersection	a;
-	t_intersection	b;
+	t_inter	a;
+	t_inter	b;
 
-	a = sin(alpha * RAD) ? find_intersection_hor(alpha, wolf, 1) : set(&a);
-	b = cos(alpha * RAD) ? find_intersection_ver(alpha, wolf, 1) : set(&b);
+	a = sin(alpha * RAD) ? ft_horizontal(alpha, wolf, 1) : set(&a);
+	b = cos(alpha * RAD) ? ft_vertical(alpha, wolf, 1) : set(&b);
 	a.dist = sqrt(pow((wolf.player.posx - a.x), 2) +
 			pow((wolf.player.posy - a.y), 2));
 	b.dist = sqrt(pow((wolf.player.posx - b.x), 2) +
@@ -37,5 +37,6 @@ int				wall_detection(t_obstacle *ob, t_data wolf, double alpha)
 	else if (b.dist >= 0)
 		ob->dist = b.dist;
 	ob->h = PRES / ob->dist * wolf.dist_player;
+	ob->col = a.dist > b.dist ? (int)b.y % (int)PRES : (int)a.x % (int)PRES;
 	return (1);
 }

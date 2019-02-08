@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 13:42:32 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/05 16:33:32 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/08 11:02:24 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_count(char *line)
 	i = 0;
 	nb = 0;
 	len = ft_strlen(line);
-	if (len > 20)
+	if (len > 1000)
 		return (0);
 	while (i < len)
 	{
@@ -46,18 +46,9 @@ void	ft_check_walls(t_map *data)
 	i = 0;
 	while (i < data->nb_num)
 	{
-		if (data->tab[0][i] != 1)
+		if (data->tab[0][i] != 1 || data->tab[i][0] != 1)
 			ft_map_error(2);
-		else if (data->tab[9][i] != 1)
-			ft_map_error(2);
-		i++;
-	}
-	i = 0;
-	while (i < data->nb_num)
-	{
-		if (data->tab[i][0] != 1)
-			ft_map_error(2);
-		else if (data->tab[i][9] != 1)
+		else if (data->tab[29][i] != 1 || data->tab[i][29] != 1)
 			ft_map_error(2);
 		i++;
 	}
@@ -106,12 +97,12 @@ int		**ft_verif(char *file)
 	while (get_next_line(fd, &line))
 	{
 		data.nb_num = ft_count(line);
-		if (data.nb_num != 10)
+		if (data.nb_num != 30)
 			ft_map_error(1);
 		data.nb_lines++;
 		free(line);
 	}
-	if (data.nb_lines != 10)
+	if (data.nb_lines != 30)
 		ft_map_error(0);
 	close(fd);
 	read_data(file, &data);
@@ -119,9 +110,8 @@ int		**ft_verif(char *file)
 	return (data.tab);
 }
 
-void	ft_init(t_data *wolf, t_obstacle *ob)
+void	ft_init(t_data *wolf)
 {
-	ob->h = 1;
 	wolf->player.dirx = 0;
 	wolf->player.diry = 0;
 	wolf->player.fov = 60;
