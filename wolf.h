@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 13:58:31 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/09 15:18:18 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/09 15:37:38 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int			ft_raycast(t_data wolf);
 int			ft_wall_detect(t_obstacle *ob, t_data wolf, double alpha);
 t_inter		ft_vertical(double alpha, t_data wolf, int obstacle);
 t_inter		ft_horizontal(double alpha, t_data wolf, int obstacle);
-void		put_pixel_image(int x, int y, int color, const t_data *wolf);
+void		ft_put_pixel(int x, int y, int color, const t_data *wolf);
 void		draw(int x, const t_data *wolf, t_obstacle ob);
 void		*thread(t_worker_arg *arg);
 
