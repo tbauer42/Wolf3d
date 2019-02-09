@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 13:58:31 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/08 14:58:30 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/09 15:18:18 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "libft/libft.h"
 # include <stdio.h>
 
-# define PRES 258.00
+# define PRES 256.00
 # define RAD (M_PI / 180.00)
 # define KEY_PLUS 69
 # define KEY_UP 126
@@ -101,7 +101,7 @@ void		ft_read_error(int x);
 void		ft_free_int(int **tab);
 void		ft_free_char(char **dst);
 int			ft_raycast(t_data wolf);
-int			wall_detection(t_obstacle *ob, t_data wolf, double alpha);
+int			ft_wall_detect(t_obstacle *ob, t_data wolf, double alpha);
 t_inter		ft_vertical(double alpha, t_data wolf, int obstacle);
 t_inter		ft_horizontal(double alpha, t_data wolf, int obstacle);
 void		put_pixel_image(int x, int y, int color, const t_data *wolf);

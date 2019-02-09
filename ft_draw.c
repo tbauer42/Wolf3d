@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 13:59:33 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/07 16:41:13 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/09 15:17:05 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 
 void	put_pixel_image(int x, int y, int color, const t_data *wolf)
 {
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
+	int	i;
 
-	r = (color >> 16) & 0xff;
-	g = (color >> 8) & 0xff;
-	b = color & 0xff;
-	wolf->str[(x * 4) + ((int)SCREEN_X * 4 * y)] = b;
-	wolf->str[(x * 4) + ((int)SCREEN_X * 4 * y) + 1] = g;
-	wolf->str[(x * 4) + ((int)SCREEN_X * 4 * y) + 2] = r;
+	i = x * 4 + SCREEN_X * 4 * y;
+	wolf->str[i] = color & 0xff;
+	wolf->str[++i] = (color >> 8) & 0xff;
+	wolf->str[++i] = (color >> 16) & 0xff;
 }
 
 void	draw(int x, const t_data *wolf, t_obstacle ob)
