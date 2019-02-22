@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_load_wall.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/24 12:54:00 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/09 15:58:30 by ochaar           ###   ########.fr       */
+/*   Created: 2019/02/11 13:50:46 by ochaar            #+#    #+#             */
+/*   Updated: 2019/02/21 15:06:29 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void	ft_map_error(int x)
+void	ft_load_wall(t_data	*wolf)
 {
-	if (x == 0)
-		ft_putstr("MAP ERROR: not a 30x30 map\n");
-	if (x == 1)
-		ft_putstr("Wrong line\n");
-	if (x == 2)
-		ft_putstr("Border are not full of walls\n");
-	exit(0);
-}
+	int a;
+	int b;
+	int i;
 
-void	ft_read_error(int x)
-{
-	if (x == 0)
-		ft_putstr("usage : ./wolf3d <filename>\n");
-	if (x == 1)
-		ft_putstr("Malloc error\n");
-	if (x == 2)
-		ft_putstr("Open error\n");
-	if (x == 3)
-		ft_putstr("Thread error\n");
-	exit(0);
+	wolf->img_w = mlx_xpm_file_to_image(wolf->mlx, "./bois.XPM", &a, &b);
+	wolf->str_w = mlx_get_data_addr(wolf->img_w, &i, &wolf->size_w, &i);
 }

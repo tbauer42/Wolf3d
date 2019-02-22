@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 13:58:31 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/09 15:37:38 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/20 16:09:21 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ typedef struct		s_data
 	void		*win;
 	void		*img;
 	char		*str;
+	void		*img_w;
+	char		*str_w;
+	int			size_w;
 	t_player	player;
 	double		proj_dist_player;
 	double		xmouse;
@@ -106,6 +109,7 @@ t_inter		ft_vertical(double alpha, t_data wolf, int obstacle);
 t_inter		ft_horizontal(double alpha, t_data wolf, int obstacle);
 void		ft_put_pixel(int x, int y, int color, const t_data *wolf);
 void		draw(int x, const t_data *wolf, t_obstacle ob);
+void		ft_load_wall(t_data	*wolf);
 void		*thread(t_worker_arg *arg);
 
 #endif

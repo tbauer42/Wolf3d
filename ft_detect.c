@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 14:14:25 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/09 14:07:12 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/20 16:19:09 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ int			ft_wall_detect(t_obstacle *ob, t_data wolf, double alpha)
 	else if (b.dist >= 0)
 		ob->dist = b.dist;
 	ob->h = PRES / ob->dist * wolf.proj_dist_player;
-	//ob->col = a.dist > b.dist ? (int)b.y % (int)PRES : (int)a.x % (int)PRES;
+	ob->col = a.dist > b.dist ? (int)b.y % (int)PRES : (int)a.x % (int)PRES;
 	return (1);
 }
