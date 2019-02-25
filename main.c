@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/06 10:19:44 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/21 17:13:25 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/02/25 14:39:38 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static int	deal_key(int key, t_data *wolf)
 		ft_walk_b(wolf, wolf->player.dirx * RAD);
 	if (key == KEY_UP)
 		ft_walk_f(wolf, wolf->player.dirx * RAD);
-	if (wolf->tab[((int)wolf->player.posy / (int)PRES)][((int)wolf->player.posx / (int)PRES)] == 1)
+	if (wolf->tab[((int)wolf->player.posy / (int)PRES)][((int)wolf->player.posx
+		/ (int)PRES)] == 1)
 	{
 		wolf->player.posx = prevx;
 		wolf->player.posy = prevy;
@@ -80,7 +81,6 @@ int			main(int argc, char **argv)
 		ft_load_wall(&wolf);
 		ft_raycast(wolf);
 		mlx_key_hook(wolf.win, deal_key, &wolf);
-		//mlx_hook(wolf.win, 6, (1L << 6), funct, &wolf);
 		mlx_loop(wolf.mlx);
 	}
 	else
