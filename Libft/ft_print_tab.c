@@ -6,22 +6,22 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 16:20:45 by ochaar            #+#    #+#             */
-/*   Updated: 2019/01/29 16:45:35 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/03/04 15:14:46 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_print_tab(int **tab)
+void	ft_print_tab(int **tab, int size)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (i < 10)
+	while (i < size)
 	{
 		j = 0;
-		while (j < 10)
+		while (j < size)
 		{
 			ft_putnbr(tab[i][j]);
 			j++;
