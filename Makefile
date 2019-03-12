@@ -6,7 +6,7 @@
 #    By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 11:13:09 by prastoin          #+#    #+#              #
-#    Updated: 2019/03/08 14:40:57 by ochaar           ###   ########.fr        #
+#    Updated: 2019/03/12 17:31:50 by ochaar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ INC_NAME = wolf.h
 SRC_NAME = main.c ft_verif.c ft_error.c ft_free.c ft_draw.c ft_ray.c menu.c \
 ft_detect.c ft_thread.c ft_load_wall.c ft_mini_map.c ft_init.c ft_move.c
 
-FLAG = -Wall -Wextra -Werror -Ofast
+FLAG = -Wall -Wextra -Werror
 
 LIB = libft/libft.a
 
@@ -50,11 +50,13 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 
 clean:
 		@make -C libft/ clean
-		rm -rf $(OBJ_PATH)
+		@rm -rf $(OBJ_PATH)
+		@echo "deleted ./obj/"
 
 fclean: clean
 		@make -C libft/ fclean
-		rm -rf $(NAME)
+		@rm -rf $(NAME)
+		@echo "deleted ./wolf3d"
 
 re: fclean all
 

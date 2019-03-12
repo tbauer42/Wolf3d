@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 13:42:32 by ochaar            #+#    #+#             */
-/*   Updated: 2019/02/27 16:19:37 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/03/12 18:11:18 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,9 @@ int		ft_count(char *line)
 		return (0);
 	while (i < len)
 	{
-		if (line[i] == ' ' || line[i] == '\t')
-			i++;
-		else
-		{
-			if (ft_isdigit(line[i]) == 1)
-			{
-				i++;
-				nb++;
-			}
-		}
+		if (ft_isdigit(line[i]) == 1)
+			nb++;
+		i++;
 	}
 	return (nb);
 }
@@ -60,6 +53,7 @@ void	read_data(char *file, t_map *data)
 	char	*line;
 	int		fd;
 
+	line = NULL;
 	data->i = 0;
 	fd = open(file, O_RDONLY);
 	if (!(data->tab = (int**)malloc(sizeof(int*) * data->nb_lines)))
@@ -89,6 +83,7 @@ int		**ft_verif(char *file)
 	char	*line;
 	t_map	data;
 
+	line = NULL;
 	data.nb_lines = 0;
 	data.nb_num = 0;
 	fd = open(file, O_RDONLY);
