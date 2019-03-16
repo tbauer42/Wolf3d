@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 13:58:31 by ochaar            #+#    #+#             */
-/*   Updated: 2019/03/12 17:46:44 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/03/15 17:07:27 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 typedef struct		s_obstacle
 {
 	int				h;
-	int				dist;
+	double			dist;
 	int				token;
 	int				col;
 	int				ori;
@@ -46,7 +46,7 @@ typedef struct		s_intersection
 {
 	double			x;
 	double			y;
-	int				dist;
+	double			dist;
 	int				token;
 	int				obstacle;
 }					t_inter;

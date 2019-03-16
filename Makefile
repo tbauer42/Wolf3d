@@ -6,7 +6,7 @@
 #    By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/07 11:13:09 by prastoin          #+#    #+#              #
-#    Updated: 2019/03/12 17:31:50 by ochaar           ###   ########.fr        #
+#    Updated: 2019/03/15 17:06:52 by ochaar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ $(LIB):
 		@make -C ./libft/
 		@echo "\033[0;34mCompilation libft \033[0m \033[0;32m [OK] \033[0m"
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c include/wolf.h
 		@mkdir -p $(OBJ_PATH)
 		@gcc $(FLAG) $(INC) -o $@ -c $<
 

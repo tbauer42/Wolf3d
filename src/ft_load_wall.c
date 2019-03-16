@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 13:50:46 by ochaar            #+#    #+#             */
-/*   Updated: 2019/03/12 17:09:51 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/03/16 15:20:43 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	ft_load_wall(t_data *wolf)
 		&a, &a);
 	wolf->tex[3].img = mlx_xpm_file_to_image(wolf->mlx, "./xpm/fiss.XPM",
 		&a, &a);
-	if (!(wolf->tex[0].img && wolf->tex[1].img && wolf->tex[2].img && wolf->tex[3].img))
+	if (!(wolf->tex[0].img && wolf->tex[1].img && wolf->tex[2].img
+		&& wolf->tex[3].img))
 		ft_read_error(4);
 	wolf->tex[0].str = mlx_get_data_addr(wolf->tex[0].img, &i,
 		&wolf->tex[0].sizel, &i);

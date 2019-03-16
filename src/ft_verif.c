@@ -6,7 +6,7 @@
 /*   By: ochaar <ochaar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 13:42:32 by ochaar            #+#    #+#             */
-/*   Updated: 2019/03/13 12:14:03 by ochaar           ###   ########.fr       */
+/*   Updated: 2019/03/16 15:23:30 by ochaar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,24 @@ void	ft_check_walls(t_map *data)
 	}
 }
 
-void	read_data(char *file, t_map *data)
+void	boucle(t_map *data, char *line)
 {
 	char	**dst;
+
+	if (!(dst = ft_strsplit(line, ' ')))
+		ft_read_error(5);
+	if (!(data->tab[data->i] = (int*)malloc(sizeof(int) * data->nb_num)))
+		ft_read_error(1);
+	while (dst[data->j])
+	{
+		data->tab[data->i][data->j] = ft_atoi(dst[data->j]);
+		data->j++;
+	}
+	ft_free_char(dst);
+}
+
+void	read_data(char *file, t_map *data)
+{
 	char	*line;
 	int		fd;
 	int		ret;
@@ -65,16 +80,7 @@ void	read_data(char *file, t_map *data)
 	{
 		data->j = 0;
 		ret = get_next_line(fd, &line);
-		if (!(dst = ft_strsplit(line, ' ')))
-			ft_read_error(5);
-		if (!(data->tab[data->i] = (int*)malloc(sizeof(int) * data->nb_num)))
-			ft_read_error(1);
-		while (dst[data->j])
-		{
-			data->tab[data->i][data->j] = ft_atoi(dst[data->j]);
-			data->j++;
-		}
-		ft_free_char(dst);
+		boucle(data, line);
 		free(line);
 		data->i++;
 	}
@@ -90,17 +96,14 @@ int		**ft_verif(char *file)
 	t_map	data;
 	int		ret;
 
-	line = NULL;
 	data.nb_lines = 0;
-	data.nb_num = 0;
 	if ((fd = open(file, O_RDONLY)) <= 0)
 		ft_read_error(2);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (ret == -1 || (!*line))
 			ft_read_error(5);
-		data.nb_num = ft_count(line);
-		if (data.nb_num != 30)
+		if ((data.nb_num = ft_count(line)) != 30)
 			ft_map_error(1, data.nb_lines + 1);
 		data.nb_lines++;
 		free(line);
